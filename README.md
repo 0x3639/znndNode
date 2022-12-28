@@ -1,6 +1,6 @@
-# dockprom
+# znndNode
 
-A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor),
+Easily run a Zenon Network node with a full suite of open source monitoring, alerting, and servicing tools from [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), [Monit](https://github.com/decryptus/monit-docker), [Loki](https://github.com/grafana/loki), [Promtail](https://github.com/grafana/puppet-promtail)
 [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
 
 ## Install
