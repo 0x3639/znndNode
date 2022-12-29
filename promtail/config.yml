@@ -11,7 +11,6 @@ clients:
 scrape_configs:
 
 # local machine logs
-
 - job_name: local
   static_configs:
   - targets:
@@ -20,18 +19,16 @@ scrape_configs:
       job: varlogs
       __path__: /var/log/*log
   
-## docker logs
-
-#- job_name: docker 
-#  pipeline_stages:
-#    - docker: {}
-#  static_configs:
-#    - labels:
-#        job: docker
-#        __path__: /var/lib/docker/containers/*/*-json.log
+# docker logs
+- job_name: docker 
+  pipeline_stages:
+    - docker: {}
+  static_configs:
+    - labels:
+        job: docker
+        __path__: /var/lib/docker/containers/*/*-json.log
 
 # syslog target
-
 #- job_name: syslog
 #  syslog:
 #    listen_address: 0.0.0.0:1514 # make sure you also expose this port on the container
