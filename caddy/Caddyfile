@@ -1,4 +1,15 @@
-:3000 {
+
+00.deeznnutz.com:35997 {
+    reverse_proxy znnd:35997 {
+        header_up host "70.34.152.117:35997"
+    }
+}
+
+00.deeznnutz.com:35998 {
+        reverse_proxy znnd:35998
+}
+
+00.deeznnutz.com:3000 {
     reverse_proxy grafana:3000  
 }
 
