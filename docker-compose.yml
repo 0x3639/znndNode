@@ -1,15 +1,43 @@
 version: '2.1'
 
 networks:
-  monitor-net:
+  znnd-net:
     driver: bridge
 
 volumes:
-    prometheus_data: {}
-    grafana_data: {}
+  prometheus_data: {}
+  grafana_data: {}
+  znnd_data: {}
 
 services:
 
+  loki:
+  image: grafana/loki:2.4.0
+  volumes:
+    - ./loki:/etc/loki
+  ports:
+    - "3100:3100"
+  restart: unless-stopped
+  command: -config.file=/etc/loki/loki.yml
+  networks:
+    - znnd-net
+  labels:
+    org.label-schema.group: "monitoring"
+
+  promtail:
+    image: grafana/promtail:2.4.0
+    volumes:
+      - /var/log:/var/log
+      - ./promtail:/etc/promtail
+    #ports:
+    #- "1514:1514" # this is only needed if you are going to send syslogs
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail.yml
+    networks:
+      - znnd-net  
+    labels:
+      org.label-schema.group: "monitoring"
+  
   prometheus:
     image: prom/prometheus:v2.40.1
     container_name: prometheus
@@ -27,7 +55,7 @@ services:
     expose:
       - 9090
     networks:
-      - monitor-net
+      - znnd-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -43,7 +71,7 @@ services:
     expose:
       - 9093
     networks:
-      - monitor-net
+      - znnd-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -63,7 +91,7 @@ services:
     expose:
       - 9100
     networks:
-      - monitor-net
+      - znnd-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -83,7 +111,7 @@ services:
     expose:
       - 8080
     networks:
-      - monitor-net
+      - znnd-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -102,7 +130,7 @@ services:
     expose:
       - 3000
     networks:
-      - monitor-net
+      - znnd-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -113,7 +141,7 @@ services:
     expose:
       - 9091
     networks:
-      - monitor-net
+      - znnd-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -122,6 +150,8 @@ services:
     container_name: caddy
     ports:
       - "3000:3000"
+      - "35997:35997"
+      - "35998:35998"
       - "8080:8080"
       - "9090:9090"
       - "9093:9093"
@@ -134,6 +164,20 @@ services:
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO}
     restart: unless-stopped
     networks:
-      - monitor-net
+      - znnd-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  znnd:
+    build: .
+    container_name: znnd
+    ports:
+      - 35995:35995
+      - 35995:35995/udp
+    volumes:
+      - znnd_data:/root/.znn
+    restart: always
+    networks:
+      - znnd-net
     labels:
       org.label-schema.group: "monitoring"
