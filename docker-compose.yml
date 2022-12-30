@@ -187,7 +187,7 @@ services:
       - 35995:35995/udp
     volumes:
       - znnd_data:/root/.znn
-    restart: always
+    restart: unless-stopped
     networks:
       - znnd-net
     labels:
