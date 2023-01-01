@@ -9,3 +9,13 @@ datasources:
     basicAuth: false
     isDefault: true
     editable: true
+  
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loko:3100
+    basicAuth: false
+    isDefault: false
+    editable: true
+
+  

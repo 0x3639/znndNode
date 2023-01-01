@@ -132,6 +132,7 @@ services:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=marcusolsson-json-datasource
     restart: unless-stopped
     expose:
       - 3000
@@ -187,6 +188,22 @@ services:
       - 35995:35995/udp
     volumes:
       - znnd_data:/root/.znn
+    restart: unless-stopped
+    networks:
+      - znnd-net
+    labels:
+      org.label-schema.group: "monitoring"
+
+  monit-docker:
+    image: decryptus/monit-docker:latest
+    container_name: monit-docker
+    environment:
+      MONIT_DOCKER_CRONS: |
+        */2 * * * * monit-docker --name 'znnd' monit --cmd-if 'mem_usage > 85 ? restart'
+        */2 * * * * monit-docker monit --cmd-if 'status not in (pause,running) ? restart'
+        */2 * * * * monit-docker monit --rsc pid
+    volumes:
+      - /var/run:/var/run:rw
     restart: unless-stopped
     networks:
       - znnd-net
