@@ -8,8 +8,8 @@ Easily run a Zenon Network node with a full suite of open source monitoring, ale
 Clone this repository on your Docker host, cd into dockprom directory and run compose up:
 
 ```bash
-git clone https://github.com/stefanprodan/dockprom
-cd dockprom
+git clone  git clone --recurse-submodules https://github.com/0x3639/znndNode.git
+cd znndNode
 
 ADMIN_USER='admin' ADMIN_PASSWORD='admin' ADMIN_PASSWORD_HASH='$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO' docker-compose up -d
 ```
@@ -20,6 +20,40 @@ Prerequisites:
 
 * Docker Engine >= 1.13
 * Docker Compose >= 1.11
+* Loki Docker Driver
+
+
+
+
+## Install Loki Docker Driver
+
+Install docker plugin
+```bash
+docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
+```
+
+Edit docker daemon config
+```bash
+sudo nano /etc/docker/daemon.json
+```
+
+deamon.json
+```bash
+{
+    "log-driver": "loki",
+    "log-opts": {
+        "loki-url": "http://localhost:3100/loki/api/v1/push",
+        "loki-batch-size": "400"
+    }
+}
+```
+
+Restart docker daemon
+```bash
+ sudo systemctl restart docker
+ ```
+
+
 
 ## Updating Caddy to v2
 
