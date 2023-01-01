@@ -18,4 +18,10 @@ datasources:
     isDefault: false
     editable: true
 
-  
+    - name: JSON_API
+    type: marcusolsson-json-datasource
+    access: proxy
+    url: https://00.deeznnutz.com:35997
+    basicAuth: false
+    isDefault: false
+    editable: true
