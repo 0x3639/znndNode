@@ -214,13 +214,13 @@ services:
     labels:
       org.label-schema.group: "monitoring"
 
-  node-ips:
-    build:
-      context: .
-      dockerfile: node-ips/Dockerfile
-    container_name: node-ips
-    restart: unless-stopped
-    networks:
-      - znnd-net
-    labels:
-      org.label-schema.group: "monitoring"
+  # node-ips:
+  #   build:
+  #     context: .
+  #     dockerfile: node-ips/Dockerfile
+  #   container_name: node-ips
+  #   restart: unless-stopped
+  #   networks:
+  #     - znnd-net
+  #   labels:
+  #     org.label-schema.group: "monitoring"
