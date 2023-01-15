@@ -24,14 +24,14 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 1,
-    "id": 3,
+    "id": 4,
     "links": [],
     "liveNow": false,
     "panels": [
       {
         "datasource": {
           "type": "marcusolsson-json-datasource",
-          "uid": "i_jMUst4z"
+          "uid": "PE4DA5BBD3D243E81"
         },
         "fieldConfig": {
           "defaults": {
@@ -95,10 +95,10 @@
         "targets": [
           {
             "body": "{\"jsonrpc\": \"2.0\", \"id\": 40, \"method\": \"stats.networkInfo\", \"params\": []}",
-            "cacheDurationSeconds": 10,
+            "cacheDurationSeconds": 30,
             "datasource": {
               "type": "marcusolsson-json-datasource",
-              "uid": "i_jMUst4z"
+              "uid": "PE4DA5BBD3D243E81"
             },
             "fields": [
               {
@@ -118,7 +118,7 @@
       {
         "datasource": {
           "type": "marcusolsson-json-datasource",
-          "uid": "4xHloQtVz"
+          "uid": "PE4DA5BBD3D243E81"
         },
         "fieldConfig": {
           "defaults": {
@@ -181,10 +181,10 @@
         "targets": [
           {
             "body": "{\"jsonrpc\": \"2.0\", \"id\": 40, \"method\": \"stats.syncInfo\", \"params\": []}",
-            "cacheDurationSeconds": 10,
+            "cacheDurationSeconds": 30,
             "datasource": {
               "type": "marcusolsson-json-datasource",
-              "uid": "4xHloQtVz"
+              "uid": "PE4DA5BBD3D243E81"
             },
             "fields": [
               {
@@ -204,7 +204,7 @@
       {
         "datasource": {
           "type": "marcusolsson-json-datasource",
-          "uid": "4xHloQtVz"
+          "uid": "PE4DA5BBD3D243E81"
         },
         "fieldConfig": {
           "defaults": {
@@ -266,11 +266,11 @@
         "pluginVersion": "9.2.4",
         "targets": [
           {
-            "body": "{\"jsonrpc\": \"2.0\", \"id\": 40, \"method\": \"stats.syncInfo\", \"params\": []}'",
-            "cacheDurationSeconds": 10,
+            "body": "{\"jsonrpc\": \"2.0\", \"id\": 40, \"method\": \"stats.syncInfo\", \"params\": []}",
+            "cacheDurationSeconds": 30,
             "datasource": {
               "type": "marcusolsson-json-datasource",
-              "uid": "4xHloQtVz"
+              "uid": "PE4DA5BBD3D243E81"
             },
             "fields": [
               {
@@ -290,7 +290,7 @@
       {
         "datasource": {
           "type": "marcusolsson-json-datasource",
-          "uid": "4xHloQtVz"
+          "uid": "PE4DA5BBD3D243E81"
         },
         "fieldConfig": {
           "defaults": {
@@ -367,7 +367,7 @@
             "cacheDurationSeconds": 10,
             "datasource": {
               "type": "marcusolsson-json-datasource",
-              "uid": "4xHloQtVz"
+              "uid": "PE4DA5BBD3D243E81"
             },
             "fields": [
               {
@@ -388,94 +388,7 @@
       {
         "datasource": {
           "type": "marcusolsson-json-datasource",
-          "uid": "i_jMUst4z"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "fixed"
-            },
-            "decimals": 0,
-            "mappings": [
-              {
-                "options": {
-                  "match": "null",
-                  "result": {
-                    "text": "N/A"
-                  }
-                },
-                "type": "special"
-              }
-            ],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 3,
-          "w": 4,
-          "x": 11,
-          "y": 0
-        },
-        "hideTimeOverride": true,
-        "id": 9,
-        "links": [],
-        "maxDataPoints": 100,
-        "options": {
-          "colorMode": "none",
-          "graphMode": "none",
-          "justifyMode": "auto",
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [
-              "last"
-            ],
-            "fields": "/^kernelVersion$/",
-            "values": false
-          },
-          "textMode": "auto"
-        },
-        "pluginVersion": "9.2.4",
-        "targets": [
-          {
-            "body": "{\"jsonrpc\": \"2.0\", \"id\": 40, \"method\": \"stats.osInfo\", \"params\": []}",
-            "cacheDurationSeconds": 300,
-            "datasource": {
-              "type": "marcusolsson-json-datasource",
-              "uid": "i_jMUst4z"
-            },
-            "fields": [
-              {
-                "jsonPath": "$.result.kernelVersion"
-              }
-            ],
-            "method": "POST",
-            "queryParams": "",
-            "refId": "A",
-            "urlPath": ""
-          }
-        ],
-        "timeFrom": "10s",
-        "title": "Kernel Version",
-        "type": "stat"
-      },
-      {
-        "datasource": {
-          "type": "marcusolsson-json-datasource",
-          "uid": "i_jMUst4z"
+          "uid": "PE4DA5BBD3D243E81"
         },
         "fieldConfig": {
           "defaults": {
@@ -514,7 +427,7 @@
         "gridPos": {
           "h": 3,
           "w": 3,
-          "x": 15,
+          "x": 11,
           "y": 0
         },
         "hideTimeOverride": true,
@@ -539,10 +452,10 @@
         "targets": [
           {
             "body": "{\"jsonrpc\": \"2.0\", \"id\": 40, \"method\": \"stats.processInfo\", \"params\": []}",
-            "cacheDurationSeconds": 300,
+            "cacheDurationSeconds": 10,
             "datasource": {
               "type": "marcusolsson-json-datasource",
-              "uid": "i_jMUst4z"
+              "uid": "PE4DA5BBD3D243E81"
             },
             "fields": [
               {
@@ -562,7 +475,94 @@
       {
         "datasource": {
           "type": "marcusolsson-json-datasource",
-          "uid": "i_jMUst4z"
+          "uid": "PE4DA5BBD3D243E81"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "fixed"
+            },
+            "decimals": 0,
+            "mappings": [
+              {
+                "options": {
+                  "match": "null",
+                  "result": {
+                    "text": "N/A"
+                  }
+                },
+                "type": "special"
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 3,
+          "w": 4,
+          "x": 14,
+          "y": 0
+        },
+        "hideTimeOverride": true,
+        "id": 9,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "none",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "last"
+            ],
+            "fields": "/^kernelVersion$/",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.2.4",
+        "targets": [
+          {
+            "body": "{\"jsonrpc\": \"2.0\", \"id\": 40, \"method\": \"stats.osInfo\", \"params\": []}",
+            "cacheDurationSeconds": 0,
+            "datasource": {
+              "type": "marcusolsson-json-datasource",
+              "uid": "PE4DA5BBD3D243E81"
+            },
+            "fields": [
+              {
+                "jsonPath": "$.result.kernelVersion"
+              }
+            ],
+            "method": "POST",
+            "queryParams": "",
+            "refId": "A",
+            "urlPath": ""
+          }
+        ],
+        "timeFrom": "10s",
+        "title": "Kernel Version",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "marcusolsson-json-datasource",
+          "uid": "PE4DA5BBD3D243E81"
         },
         "fieldConfig": {
           "defaults": {
@@ -626,10 +626,10 @@
         "targets": [
           {
             "body": "{\"jsonrpc\": \"2.0\", \"id\": 40, \"method\": \"stats.processInfo\", \"params\": []}",
-            "cacheDurationSeconds": 300,
+            "cacheDurationSeconds": 10,
             "datasource": {
               "type": "marcusolsson-json-datasource",
-              "uid": "i_jMUst4z"
+              "uid": "PE4DA5BBD3D243E81"
             },
             "fields": [
               {
@@ -721,9 +721,7 @@
             ],
             "displayMode": "table",
             "placement": "right",
-            "showLegend": true,
-            "sortBy": "Max",
-            "sortDesc": true
+            "showLegend": true
           },
           "tooltip": {
             "mode": "multi",
@@ -902,6 +900,6 @@
     "timezone": "browser",
     "title": "Zenon Node",
     "uid": "FlgeyBt4z",
-    "version": 17,
+    "version": 12,
     "weekStart": ""
   }
