@@ -1,29 +1,108 @@
 # znndNode
 
-Easily run a Zenon Network node with a full suite of open source monitoring, alerting, and servicing tools from [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), [Monit](https://github.com/decryptus/monit-docker), [Loki](https://github.com/grafana/loki), [Promtail](https://github.com/grafana/puppet-promtail)
-[NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
+Easily run a Zenon Network node on Docker with a full suite of open source monitoring, alerting, and servicing tools. Docker Containers incldue:
+* [Zenon Network Node](https://github.com/zenon-network/go-zenon)
+* [Grafana](http://grafana.org/)
+* [NodeExporter](https://github.com/prometheus/node_exporter)
+* [Prometheus](https://prometheus.io/)
+* [Loki](https://github.com/grafana/loki)
+* [cAdvisor](https://github.com/google/cadvisor)
+* [Monit-Docker](https://github.com/decryptus/monit-docker)
+* [Promtail](https://github.com/grafana/puppet-promtail)
+* [AlertManager](https://github.com/prometheus/alertmanager)
+* [Caddy](https://hub.docker.com/_/caddy)
+* [Push Gateway](https://prometheus.io/docs/practices/pushing/)
 
-## Install
+## Before You Start
+How do you know this node will not harm [Zenon Network](https://zenon.network) or the Node Operator?
 
-Clone this repository on your Docker host, cd into dockprom directory and run compose up:
+Let's start by making sure the node software is based on the Official Zenon Network `go-zenon` node implementation. Open the `Dockerfile` and let's review the build instructions.  
 
-```bash
-git clone  git clone --recurse-submodules https://github.com/0x3639/znndNode.git
-cd znndNode
+```
+# Establishes the image used to compile the node software.  It's from golang.
+FROM golang:1.18 as build-env 
 
-ADMIN_USER='admin' ADMIN_PASSWORD='admin' ADMIN_PASSWORD_HASH='$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO' docker-compose up -d
+# Establishes the working directory
+WORKDIR /go/src/znnd 
+
+# Copies modules and dependencies to image necessary to compile go-zenon
+COPY go-zenon/go.mod .
+COPY go-zenon/go.sum .
+RUN go mod download
+
+# Copies go-zenon from the Official Repo to the image to be compiled.  go-zenon is a [Submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) of the Official Repo.  You can confirm this by clicking on the `go-zenon` folder in [znndNode](https://github.com/0x3639/znndNode).  It will redirect you to the Official Repo.
+COPY go-zenon .
+
+# Compiles go-zenon and stores it in the folder /go/bin/znnd
+RUN go build -o /go/bin/znnd main.go
+
+# Estabishes a minimal image to run `znnd`.  The Image is created and hosted by google.  Visit this website to see the image.  gcr.io/distroless
+FROM gcr.io/distroless/base
+
+# Copies `znnd` from the output above into the new runtime image at location `/`.  After copying `znnd` the binary is started.
+COPY --from=build-env /go/bin/znnd /
+CMD ["/znnd"]
+
+# Exposes ports 35995, 35997, and 35998 on the image
+EXPOSE 35995/tcp
+EXPOSE 35995/udp
+EXPOSE 35997/tcp
+EXPOSE 35998/tcp
 ```
 
-**Caddy v2 does not accept plaintext passwords. It MUST be provided as a hash value. The above password hash corresponds to ADMIN_PASSWORD 'admin'. To know how to generate hash password, refer [Updating Caddy to v2](#Updating-Caddy-to-v2)**
+All other Docker Images are open source and can be independently audited are reviewed by the user.
 
-Prerequisites:
+## Quick Start
+
+Install requirements, clone this repository on your host and run docker-compose.
+
+```bash
+git clone --recurse-submodules https://github.com/0x3639/znndNode.git
+
+cd znndNode
+
+# Update all references to domain names
+
+sudo docker-compose up -d
+```
+
+### Places to change hard coded domain names and IP address
+
+- caddy/Caddyfile
+- grafana/datasources/datasource.yml
+
+## Todo
+
+Provide Instructions on how to use this.  Safe to ignore.
+
+ADMIN_USER='admin' ADMIN_PASSWORD='admin' ADMIN_PASSWORD_HASH='$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO' 
+
+Caddy v2 does not accept plaintext passwords. It MUST be provided as a hash value. The above password hash corresponds to ADMIN_PASSWORD 'admin'.
+
+## Prerequisites:
 
 * Docker Engine >= 1.13
 * Docker Compose >= 1.11
 * Loki Docker Driver
+* haveged
 
+## Install Docker
+```bash
+ curl -fsSL https://get.docker.com -o get-docker.sh
+ sudo sh get-docker.sh
+ ```
 
+## Install Docker Compose
+```bash
+ sudo apt-get update
+ sudo apt-get install docker-compose-plugin
+ ```
 
+ Test the Docker Compose Installation
+ ```bash
+docker compose version
+Docker Compose version vN.N.N # <- You should see output like this
+ ```
 
 ## Install Loki Docker Driver
 
@@ -37,7 +116,7 @@ Edit docker daemon config
 sudo nano /etc/docker/daemon.json
 ```
 
-deamon.json
+Insert the follwing string into deamon.json
 ```bash
 {
     "log-driver": "loki",
@@ -53,7 +132,13 @@ Restart docker daemon
  sudo systemctl restart docker
  ```
 
+## Install haveged
 
+```bash
+sudo apt-get install haveged
+sudo systemctl start haveged
+sudo update-rc.d haveged defaults
+```
 
 ## Updating Caddy to v2
 

@@ -161,6 +161,7 @@ services:
       - "3000:3000"
       - "35997:35997"
       - "35998:35998"
+      - "8000:8000"
       - "8080:8080"
       - "9090:9090"
       - "9093:9093"
@@ -174,6 +175,9 @@ services:
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO}
+      #- DOMAIN=${example.com} #Change the domain name
+      #- PUBLIC_IP=${1.1.1.1} #Change the public IP Address of the node
+
     restart: unless-stopped
     networks:
       - znnd-net
@@ -209,3 +213,14 @@ services:
       - znnd-net
     labels:
       org.label-schema.group: "monitoring"
+
+  # node-ips:
+  #   build:
+  #     context: .
+  #     dockerfile: node-ips/Dockerfile
+  #   container_name: node-ips
+  #   restart: unless-stopped
+  #   networks:
+  #     - znnd-net
+  #   labels:
+  #     org.label-schema.group: "monitoring"
