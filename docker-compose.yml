@@ -15,7 +15,7 @@ volumes:
 services:
 
   loki:
-    image: grafana/loki:2.4.0
+    image: grafana/loki:2.6.1
     container_name: loki
     volumes:
       - ./loki:/etc/loki
@@ -31,7 +31,7 @@ services:
       org.label-schema.group: "monitoring"
 
   promtail:
-    image: grafana/promtail:2.4.0
+    image: grafana/promtail:2.6.1
     container_name: promtail
     volumes:
       - /var/log:/var/log
