@@ -9,14 +9,6 @@ datasources:
     basicAuth: false
     isDefault: true
     editable: true
-  
-  - name: Loki
-    type: loki
-    access: proxy
-    url: http://loki:3100
-    basicAuth: false
-    isDefault: false
-    editable: true
 
   - name: JSON_API
     type: marcusolsson-json-datasource
@@ -25,3 +17,11 @@ datasources:
     basicAuth: false
     isDefault: false
     editable: true
+    
+  # - name: Loki
+  #   type: loki
+  #   access: proxy
+  #   url: http://loki:3100
+  #   basicAuth: false
+  #   isDefault: false
+  #   editable: true
