@@ -144,8 +144,8 @@ services:
       - ADMIN_USER=${ADMIN_USER:-admin}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO}
-      #- DOMAIN=${example.com} #Change the domain name
-      #- PUBLIC_IP=${1.1.1.1} #Change the public IP Address of the node
+      - DOMAIN=${DOMAIN:-example.com} #Change the domain name
+      - PUBLIC_IP=${PUBLIC_IP:-1.1.1.1} #Change the public IP Address of the node
 
     restart: unless-stopped
     networks:
