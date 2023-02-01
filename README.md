@@ -58,12 +58,12 @@ Save and exit `ctrl-x`
 
 Ensure the following ports are open and forwarded to the private node IP address
 
-TCP: 3000, 35995, 35997, 35998
+TCP: 3000, 35995, 35997, 35998, 80, 443
 UDP: 35995
 
 Start the Docker stack
 ```
-sudo docker-compose up -d
+sudo docker compose up -d
 ```
 
 Docker images will be built or downloaded and configured.  After all image are started you can check to make sure the images are running with the following command. Make sure you are in the `/znndNode` directory.
