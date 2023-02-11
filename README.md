@@ -35,9 +35,9 @@ Confirm Docker is installed correctly
 docker -v
 ```
 
-Clone the znndNode Repository
+Clone the znndNode Repository and Submodules
 ```
-git clone https://github.com/0x3639/znndNode.git
+git clone --recurse-submodules https://github.com/0x3639/znndNode.git
 ```
 
 Update the docker-compose.yml file with the correct Domain Name and Public IP address
