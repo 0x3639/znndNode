@@ -16,31 +16,30 @@
     reverse_proxy node-ips:80/api/
 }
 
-// TODO ALLOW ACCESS TO ADDITIONAL RESOURCES
-// :8080 {
-//     basicauth /* {
-//         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
-//     }    
-//     reverse_proxy cadvisor:8080
-// }
+:8080 {
+    basicauth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }    
+    reverse_proxy cadvisor:8080
+}
 
-// :9090 {
-//     basicauth /* {
-//         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
-//     }
-//     reverse_proxy prometheus:9090
-// }
+:9090 {
+    basicauth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }
+    reverse_proxy prometheus:9090
+}
 
-// :9093 {
-//     basicauth /* {
-//         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
-//     }
-//     reverse_proxy alertmanager:9093
-// }
+:9093 {
+    basicauth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }
+    reverse_proxy alertmanager:9093
+}
 
-// :9091 {
-//     basicauth /* {
-//         {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
-//     }    
-//     reverse_proxy pushgateway:9091
-// }
+:9091 {
+    basicauth /* {
+        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
+    }    
+    reverse_proxy pushgateway:9091
+}
