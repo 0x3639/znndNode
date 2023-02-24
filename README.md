@@ -74,5 +74,5 @@ sudo docker compose up -d
 Docker images will be built or downloaded and configured.  After all image are started you can check to make sure the images are running with the following command. Make sure you are in the `/znndNode` directory.
 
 ```
-sudo docker-compose ps
+sudo docker compose ps
 ```
