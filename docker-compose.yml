@@ -98,10 +98,10 @@ services:
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
     environment:
-      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_INSTALL_PLUGINS=marcusolsson-json-datasource
+      - GF_SECURITY_ADMIN_USER
+      - GF_SECURITY_ADMIN_PASSWORD
+      - GF_USERS_ALLOW_SIGN_UP
+      - GF_INSTALL_PLUGINS
     restart: unless-stopped
     expose:
       - 3000
@@ -141,11 +141,11 @@ services:
       - caddy_config:/config
       - ./site:/srv # Not necessary for this configuration
     environment:
-      - ADMIN_USER=${ADMIN_USER:-admin}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO}
-      - DOMAIN=${DOMAIN:-example.com} #Change the domain name
-      - PUBLIC_IP=${PUBLIC_IP:-1.1.1.1} #Change the public IP Address of the node
+      - ADMIN_USER
+      - ADMIN_PASSWORD
+      - ADMIN_PASSWORD_HASH
+      - DOMAIN
+      - PUBLIC_IP
 
     restart: unless-stopped
     networks:
