@@ -65,6 +65,9 @@ Ensure the following ports are open and forwarded to the private node IP address
 TCP: 3000, 35995, 35997, 35998, 80, 443
 UDP: 35995
 
+IMPORTANT:
+Make sure to insert an A Record at your DNS provider pointing the domain name (setup above) to the IP address (setup above) of your server.
+
 Start the Docker stack
 ```
 cd ~/znndNode
@@ -76,3 +79,11 @@ Docker images will be built or downloaded and configured.  After all image are s
 ```
 sudo docker compose ps
 ```
+
+Log into grafana and setup a new password
+```
+https://example.com:3000 #Replace example.com with the domain you setup above.
+```
+Default User ID = `admin` Password = `admin`
+
+
