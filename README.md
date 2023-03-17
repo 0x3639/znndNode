@@ -40,24 +40,24 @@ Clone the znndNode Repository and Submodules
 git clone --recurse-submodules https://github.com/0x3639/znndNode.git
 ```
 
-Update the docker-compose.yml file with the correct Domain Name and Public IP address
+Update the .env file with the correct Domain Name and Public IP address
 ```
 cd znndNode
-nano docker-compose.yml
+nano .env
 ```
 
 Change the Domain and Public IP Variables
 ```
-DOMAIN=${DOMAIN:-example.com} #Change the domain name
-PUBLIC_IP=${PUBLIC_IP:-1.1.1.1} #Change the public IP Address of the node
+DOMAIN=example.com #UPDATE THE DOMAIN NAME
+PUBLIC_IP=1.1.1.1 #UPDATE THE IP ADDRESS
+ADMIN_USER=admin
+ADMIN_PASSWORD=admin
+ADMIN_PASSWORD_HASH=$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO
+GF_SECURITY_ADMIN_USER=admin
+GF_SECURITY_ADMIN_PASSWORD=admin
+GF_USERS_ALLOW_SIGN_UP=false
+GF_INSTALL_PLUGINS=marcusolsson-json-datasource
 ```
-Make sure to leave `DOMAIN=${DOMAIN:-` and only change the domain name
-Make sure to leave `PUBLIC_IP=${PUBLIC_IP:-` and only change the IP address
-
-For Example:
-DOMAIN=${DOMAIN:-public.zenon-node.com} #Change the domain name
-PUBLIC_IP=${PUBLIC_IP:-69.69.69.69} #Change the public IP Address of the node
-
 Save and exit `ctrl-x`
 
 Ensure the following ports are open and forwarded to the private node IP address

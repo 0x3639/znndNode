@@ -13,7 +13,7 @@ datasources:
   - name: JSON_API
     type: marcusolsson-json-datasource
     access: proxy
-    url: 02.deeznnutz.com:35997
+    url: https://${DOMAIN}:35997
     basicAuth: false
     isDefault: false
     editable: true
