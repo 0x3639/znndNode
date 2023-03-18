@@ -301,7 +301,7 @@
             {
               "options": {
                 "1": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 1,
                   "text": "Syncing"
                 },
@@ -309,6 +309,11 @@
                   "color": "green",
                   "index": 2,
                   "text": "Synced"
+                },
+                "3": {
+                  "color": "dark-red",
+                  "index": 3,
+                  "text": "Not Enough Peers"
                 }
               },
               "type": "value"
@@ -317,7 +322,7 @@
               "options": {
                 "match": "null",
                 "result": {
-                  "color": "red",
+                  "color": "dark-red",
                   "index": 0,
                   "text": "N/A"
                 }
@@ -900,6 +905,6 @@
   "timezone": "browser",
   "title": "Zenon Node",
   "uid": "FlgeyBt4z",
-  "version": 13,
+  "version": 2,
   "weekStart": ""
 }
