@@ -90,8 +90,8 @@ Default User ID = `admin` Password = `admin`
 
 Replace `example.com` with your domain name
 
-- Grafana Access `https://example.com:3000
-- Syrius Access `wss://example.com:35998`
+- Grafana Access `https://example.com:3000`
+- SYRIUS Access `wss://example.com:35998`
 - API Access `https://example.com:35997`
 - Check Sync Status `curl -X GET https://example.com:35997 -H "content-type: application/json" -d '{"jsonrpc": "2.0", "id": 40, "method": "stats.syncInfo", "params": []}'`
 
