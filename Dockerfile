@@ -1,4 +1,4 @@
-FROM golang:1.18 as build-env
+FROM golang:1.19.4 as build-env
 
 WORKDIR /go/src/znnd
 
