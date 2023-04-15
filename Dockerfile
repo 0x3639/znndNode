@@ -1,6 +1,6 @@
-FROM golang:1.19.4 as build-env
+FROM golang:latest as build-env
 
-WORKDIR /go/src/znnd
+WORKDIR /app
 
 # copy Go modules and dependencies to image
 COPY go-zenon/go.mod .
@@ -13,12 +13,13 @@ RUN go mod download
 COPY go-zenon .
 
 # compile code
-RUN go build -o /go/bin/znnd main.go
+RUN make znnd
 
 # move binary to thin image
 FROM gcr.io/distroless/base
 
-COPY --from=build-env /go/bin/znnd /
+COPY --from=build-env /app/build/znnd /
+
 CMD ["/znnd"]
 
 EXPOSE 35995/tcp
