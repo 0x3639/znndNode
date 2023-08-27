@@ -1,4 +1,4 @@
-FROM golang:latest as build-env
+FROM golang:1.21 as build-env
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ COPY go-zenon .
 RUN make znnd
 
 # move binary to thin image
-FROM gcr.io/distroless/base
+FROM gcr.io/distroless/static-debian11
 
 COPY --from=build-env /app/build/znnd /
 
